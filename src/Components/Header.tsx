@@ -1,6 +1,7 @@
 import { Link, useRouteMatch } from "react-router-dom";
 import { motion } from "framer-motion";
 import styled from "styled-components";
+import { useState } from "react";
 
 const Nav = styled.div`
   display: flex;
@@ -49,7 +50,14 @@ const Item = styled.li`
   }
 `;
 
-const Circle = styled.span`
+const Search = styled.span`
+  color: white;
+  svg {
+    height: 25px;
+  }
+`;
+
+const Circle = styled(motion.span)`
   position: absolute;
   width: 5px;
   height: 5px;
@@ -74,9 +82,9 @@ const logoVariants = {
 };
 
 const Header = () => {
+  const [searchOpen, setSearchOpen] = useState(false);
   const homeMatch = useRouteMatch("/");
   const tvMatch = useRouteMatch("/tv");
-  console.log(homeMatch, tvMatch);
   return (
     <Nav>
       <Col>
@@ -93,15 +101,31 @@ const Header = () => {
         </Logo>
         <Items>
           <Item>
-            <Link to="/">Home {homeMatch?.isExact && <Circle />}</Link>
+            <Link to="/">
+              Home {homeMatch?.isExact && <Circle layoutId="circle" />}
+            </Link>
           </Item>
           <Item>
-            <Link to="/tv">TV Shows {tvMatch && <Circle />}</Link>
+            <Link to="/tv">
+              TV Shows {tvMatch && <Circle layoutId="circle" />}
+            </Link>
           </Item>
         </Items>
       </Col>
       <Col>
-        <button>Search</button>
+        <Search>
+          <svg
+            fill="currentColor"
+            viewBox="0 0 20 20"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              fillRule="evenodd"
+              d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+              clipRule="evenodd"
+            ></path>
+          </svg>
+        </Search>
       </Col>
     </Nav>
   );
