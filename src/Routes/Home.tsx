@@ -4,7 +4,6 @@ import { getMovies, IGetMoviesResult } from "../api";
 import { makeImagePath } from "../utils";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
-import { UV_FS_O_FILEMAP } from "node:constants";
 
 const Wrapper = styled.div`
   background: black;
@@ -54,16 +53,29 @@ const Row = styled(motion.div)`
 
 const Box = styled(motion.div)<{ bgPhoto: string }>`
   background-color: white;
-  height: 200px;
+  height: 300px;
   background-image: url(${(props) => props.bgPhoto});
   background-size: cover;
   background-position: center;
   font-size: 64px;
+  &:last-child {
+    transform-origin: center right;
+  }
   &:first-child {
     transform-origin: center left;
   }
-  &:last-child {
-    transform-origin: center right;
+`;
+
+const Info = styled(motion.div)`
+  padding: 10px;
+  background-color: ${(props) => props.theme.black.lighter};
+  opacity: 0;
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  h4 {
+    text-align: center;
+    font-size: 18px;
   }
 `;
 
@@ -88,7 +100,18 @@ const boxVariants = {
     y: -50,
     transition: {
       delay: 0.5,
-      duaration: 0.3,
+      duaration: 0.1,
+      type: "tween",
+    },
+  },
+};
+
+const infoVariants = {
+  hover: {
+    opacity: 1,
+    transition: {
+      delay: 0.5,
+      duaration: 0.1,
       type: "tween",
     },
   },
@@ -147,7 +170,11 @@ const Home = () => {
                       variants={boxVariants}
                       transition={{ type: "tween" }}
                       bgPhoto={makeImagePath(movie.backdrop_path, "w500")}
-                    ></Box>
+                    >
+                      <Info variants={infoVariants}>
+                        <h4>{movie.title}</h4>
+                      </Info>
+                    </Box>
                   ))}
               </Row>
             </AnimatePresence>
