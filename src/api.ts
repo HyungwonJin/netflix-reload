@@ -46,3 +46,9 @@ export function getTopRated() {
     (response) => response.json()
   );
 }
+
+export function getUpcoming() {
+  return fetch(`${BASE_PATH}/movie/upcoming?api_key=${API_KEY}`).then(
+    (response) => response.json()
+  );
+}
