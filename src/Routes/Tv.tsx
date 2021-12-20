@@ -5,6 +5,7 @@ import { useHistory, useRouteMatch } from "react-router-dom";
 import styled from "styled-components";
 import { getAiringToday, getPopular, getTopRatedTv, ITvResult } from "../api";
 import { makeImagePath } from "../utils";
+import Detail from "../Components/Detail";
 
 const Wrapper = styled.div`
   background: black;
@@ -130,28 +131,6 @@ const BigMovie = styled(motion.div)`
   z-index: 102;
 `;
 
-const BigCover = styled.div`
-  width: 100%;
-  background-size: cover;
-  background-position: center center;
-  height: 200px;
-`;
-
-const BigTitle = styled.h3`
-  color: ${(props) => props.theme.white.lighter};
-  padding: 20px;
-  font-size: 28px;
-  position: relative;
-  top: -80px;
-`;
-
-const BigOverview = styled.p`
-  padding: 20px;
-  position: relative;
-  top: -80px;
-  color: ${(props) => props.theme.white.lighter};
-`;
-
 const rowVariants = {
   hidden: {
     x: window.outerWidth,
@@ -271,13 +250,7 @@ const Tv = () => {
     history.push(`/tv/${tvId}`);
   };
   const onOverlayClick = () => history.push("/tv");
-  const clickedTv =
-    bigTvMatch?.params.tvId &&
-    (data?.results.find((movie) => movie.id === +bigTvMatch.params.tvId) ||
-      rateData?.results.find((movie) => movie.id === +bigTvMatch.params.tvId) ||
-      popularData?.results.find(
-        (movie) => movie.id === +bigTvMatch.params.tvId
-      ));
+
   return (
     <Wrapper>
       {isLoading ? (
@@ -399,20 +372,7 @@ const Tv = () => {
                   style={{ top: scrollY.get() + 80 }}
                   layoutId={bigTvMatch.params.tvId}
                 >
-                  {clickedTv && (
-                    <>
-                      <BigCover
-                        style={{
-                          backgroundImage: `linear-gradient(to top, black, transparent), url(${makeImagePath(
-                            clickedTv.backdrop_path,
-                            "w500"
-                          )})`,
-                        }}
-                      />
-                      <BigTitle>{clickedTv.name}</BigTitle>
-                      <BigOverview>{clickedTv.overview}</BigOverview>
-                    </>
-                  )}
+                  <Detail />
                 </BigMovie>
               </>
             ) : null}

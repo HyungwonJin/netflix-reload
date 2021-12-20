@@ -139,9 +139,10 @@ const Header = () => {
     });
   }, [scrollY, navAnimation]);
   const history = useHistory();
-  const { register, handleSubmit } = useForm<IForm>();
+  const { register, setValue, handleSubmit } = useForm<IForm>();
   const onValid = (data: IForm) => {
     history.push(`/search?keyword=${data.keyword}`);
+    setValue("keyword", "");
   };
   return (
     <Nav variants={navVariants} animate={navAnimation} initial={"top"}>
