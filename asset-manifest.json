@@ -1,0 +1,10 @@
+{
+  "files": {
+    "main.js": "/netflix-reload/static/js/main.991dad38.js",
+    "index.html": "/netflix-reload/index.html",
+    "main.991dad38.js.map": "/netflix-reload/static/js/main.991dad38.js.map"
+  },
+  "entrypoints": [
+    "static/js/main.991dad38.js"
+  ]
+}
