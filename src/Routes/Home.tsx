@@ -75,7 +75,7 @@ const NextBtn = styled.div`
 const PrevBtn = styled.div`
   position: absolute;
   left: 0;
-  top: 130px;
+  top: 10px;
   background-color: rgba(0, 0, 0, 0.5);
   width: 60px;
   height: 60px;
@@ -88,14 +88,6 @@ const PrevBtn = styled.div`
 `;
 
 const Row = styled(motion.div)`
-  display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  gap: 5px;
-  margin-bottom: 5px;
-  position: absolute;
-  width: 100%;
-`;
-const Row2 = styled(motion.div)`
   display: grid;
   grid-template-columns: repeat(6, 1fr);
   gap: 5px;
@@ -153,6 +145,7 @@ const BigMovie = styled(motion.div)`
   border-radius: 15px;
   overflow: hidden;
   background-color: ${(props) => props.theme.black.lighter};
+  z-index: 102;
 `;
 
 const BigCover = styled.div`
@@ -183,6 +176,7 @@ const SliderTitle = styled.div`
   font-weight: 500;
   position: absolute;
   top: -80px;
+  z-index: 1;
 `;
 
 const rowVariants = {
@@ -364,7 +358,7 @@ const Home = () => {
             <NextBtn onClick={increaseIndex2}>&rarr;</NextBtn>
             <PrevBtn onClick={decreaseIndex2}>&larr;</PrevBtn>
             <AnimatePresence initial={false} onExitComplete={toggleLeaving}>
-              <Row2
+              <Row
                 variants={rowVariants}
                 initial="hidden"
                 animate="visible"
@@ -390,7 +384,7 @@ const Home = () => {
                       </Info>
                     </Box>
                   ))}
-              </Row2>
+              </Row>
             </AnimatePresence>
           </Slider2>
           <Slider3>
@@ -398,7 +392,7 @@ const Home = () => {
             <NextBtn onClick={increaseIndex3}>&rarr;</NextBtn>
             <PrevBtn onClick={decreaseIndex3}>&larr;</PrevBtn>
             <AnimatePresence initial={false} onExitComplete={toggleLeaving}>
-              <Row2
+              <Row
                 variants={rowVariants}
                 initial="hidden"
                 animate="visible"
@@ -424,7 +418,7 @@ const Home = () => {
                       </Info>
                     </Box>
                   ))}
-              </Row2>
+              </Row>
             </AnimatePresence>
           </Slider3>
 

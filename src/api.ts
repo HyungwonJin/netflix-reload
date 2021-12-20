@@ -1,6 +1,8 @@
 const API_KEY = "a37686c59e37854e9fb5b97756926511";
 const BASE_PATH = "https://api.themoviedb.org/3";
 
+// Movies
+
 interface IMovies {
   id: number;
   backdrop_path: string;
@@ -49,6 +51,40 @@ export function getTopRated() {
 
 export function getUpcoming() {
   return fetch(`${BASE_PATH}/movie/upcoming?api_key=${API_KEY}`).then(
+    (response) => response.json()
+  );
+}
+
+// TV
+interface ITopRated {
+  id: number;
+  backdrop_path: string;
+  poster_path: string;
+  name: string;
+  overview: string;
+}
+
+export interface ITvResult {
+  page: number;
+  results: ITopRated[];
+  total_pages: number;
+  total_results: number;
+}
+
+export function getAiringToday() {
+  return fetch(`${BASE_PATH}/tv/airing_today?api_key=${API_KEY}`).then(
+    (response) => response.json()
+  );
+}
+
+export function getPopular() {
+  return fetch(`${BASE_PATH}/tv/popular?api_key=${API_KEY}`).then((response) =>
+    response.json()
+  );
+}
+
+export function getTopRatedTv() {
+  return fetch(`${BASE_PATH}/tv/top_rated?api_key=${API_KEY}`).then(
     (response) => response.json()
   );
 }
